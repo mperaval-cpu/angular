@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Email Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="formApp">
+
+    <div ng-controller="formCtrl">
+        <form name="userForm" novalidate>
+            <label>Student Name:</label>
+            <input type="text" ng-model="studentName" placeholder="Enter name">
+            
+            <br><br>
+
+            <label>Email Address:</label>
+            <input type="email" name="userEmail" ng-model="email" required>
+            
+            <span style="color:red" ng-show="userForm.userEmail.$dirty && userForm.userEmail.$invalid">
+                <span ng-show="userForm.userEmail.$error.required">Email is required.</span>
+                <span ng-show="userForm.userEmail.$error.email">Invalid email address.</span>
+            </span>
+
+            <hr>
+
+            <h3 ng-show="studentName">Hello, {{ studentName }}!</h3>
+            <p ng-show="userForm.userEmail.$valid">Your registered email is: {{ email }}</p>
+        </form>
+    </div>
+
+    <script>
+        var app = angular.module('formApp', []);
+        app.controller('formCtrl', function($scope) {
+            $scope.studentName = "";
+            $scope.email = "";
+        });
+    </script>
+
+</body>
+</html>
